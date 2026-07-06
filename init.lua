@@ -100,6 +100,17 @@ do
   --  See `:help hlsearch`
   vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+  -- VimDiff Keymaps
+  vim.keymap.set('n', '[c', '[czz', { desc = 'Go to previous [C]hange' })
+  vim.keymap.set('n', ']c', ']czz', { desc = 'Go to next [C]hange' })
+
+  -- Quickfix Keymaps
+  vim.keymap.set('n', '<leader>n', ':cn<Enter>', { desc = 'Go to [N]ext quickfix list item' })
+  vim.keymap.set('n', '<leader>p', ':cp<Enter>', { desc = 'Go to [P]revious quickfix list item' })
+
+  -- MiniFiles keymap
+  vim.keymap.set('n', '<leader>e', function() MiniFiles.open() end, { desc = 'Open the MiniFiles [E]xplorer' })
+
   -- Diagnostic Config & Keymaps
   --  See `:help vim.diagnostic.Opts`
   vim.diagnostic.config {
@@ -284,8 +295,12 @@ do
     icons = { mappings = vim.g.have_nerd_font },
     -- Document existing key chains
     spec = {
+      { '<leader>c', group = '[C]ode' },
+      { '<leader>d', group = '[D]ocument' },
+      { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
       { '<leader>t', group = '[T]oggle' },
+      { '<leader>w', group = '[W]orkspace' },
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
       { 'gr', group = 'LSP Actions', mode = { 'n' } },
     },
@@ -378,7 +393,7 @@ do
   --  Check out: https://github.com/nvim-mini/mini.nvim
 
   -- Harpoon: quick file marking and jumping
-  vim.pack.add { gh 'ThePrimeagen/harpoon' }
+  vim.pack.add { gh 'nvim-lua/plenary.nvim', gh 'ThePrimeagen/harpoon' }
   require('harpoon').setup()
 
   -- OmniSharp: .NET development
