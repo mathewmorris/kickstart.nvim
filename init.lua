@@ -355,6 +355,10 @@ do
   -- - sr)'  - [S]urround [R]eplace [)] [']
   require('mini.surround').setup()
 
+  -- Git integration and file explorer
+  require('mini.git').setup()
+  require('mini.files').setup()
+
   -- Simple and easy statusline.
   --  You could remove this setup call if you don't like it,
   --  and try some other statusline plugin
@@ -368,8 +372,17 @@ do
   ---@diagnostic disable-next-line: duplicate-set-field
   statusline.section_location = function() return '%2l:%-2v' end
 
+  statusline.section_git { trunc_width = 20 }
+
   -- ... and there is more!
   --  Check out: https://github.com/nvim-mini/mini.nvim
+
+  -- Harpoon: quick file marking and jumping
+  vim.pack.add { gh 'ThePrimeagen/harpoon' }
+  require('harpoon').setup()
+
+  -- OmniSharp: .NET development
+  vim.pack.add { gh 'OmniSharp/omnisharp-vim' }
 end
 
 -- ============================================================
@@ -747,8 +760,8 @@ do
   --    See the README about individual language/framework/plugin snippets:
   --    https://github.com/rafamadriz/friendly-snippets
   --
-  -- vim.pack.add { gh 'rafamadriz/friendly-snippets' }
-  -- require('luasnip.loaders.from_vscode').lazy_load()
+  vim.pack.add { gh 'rafamadriz/friendly-snippets' }
+  require('luasnip.loaders.from_vscode').lazy_load()
 
   -- [[ Autocomplete Engine ]]
   vim.pack.add { { src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' } }
